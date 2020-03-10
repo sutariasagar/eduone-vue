@@ -1,0 +1,131 @@
+// Container
+$awn-container-z-index: 99998 !default;
+$awn-container-padding: 24px !default;
+
+// Notifications
+$awn-toast-width: 320px !default;
+$awn-toast-padding: 16px !default;
+$awn-toast-margin: 16px !default;
+$awn-toast-border-width: 1px !default;
+$awn-toast-border-style: solid !default;
+$awn-toast-border-color: #e0e0e0 !default;
+$awn-border: $awn-toast-border-width $awn-toast-border-style
+$awn-toast-border-color !default;
+$awn-progress-bar-height: 2px !default;
+$awn-toast-font-size: 13px !default;
+$awn-toast-title-font-size: 16px !default;
+$awn-toast-icon-size: 44px !default;
+
+// Colors
+$awn-primary-color: #999 !default;
+$awn-primary-background: lighten($awn-primary-color, 33%) !default;
+$awn-primary-bar-background: lighten($awn-primary-color, 35%) !default;
+$awn-primary-border-color: $awn-toast-border-color !default;
+
+$awn-success-color: rgb(166, 166, 166) !default;
+$awn-success-background: #fff !default;
+$awn-success-bar-background: #fff !default;
+$awn-success-border-color: #fff !default;
+
+$awn-info-color: #0a96e2 !default;
+$awn-info-background: lighten($awn-info-color, 38%) !default;
+$awn-info-bar-background: lighten($awn-info-color, 42%) !default;
+$awn-info-border-color: lighten($awn-info-color, 20%) !default;
+
+$awn-alert-color: #9d2c27 !default;
+$awn-alert-background: lighten($awn-alert-color, 38%) !default;
+$awn-alert-bar-background: lighten($awn-alert-color, 42%) !default;
+$awn-alert-border-color: lighten($awn-alert-color, 25%) !default;
+
+$awn-warning-color: #e66c0e !default;
+$awn-warning-background: lighten($awn-warning-color, 38%) !default;
+$awn-warning-bar-background: lighten($awn-warning-color, 42%) !default;
+$awn-warning-border-color: lighten($awn-warning-color, 25%) !default;
+
+// Modal Windows
+$awn-modal-wrapper-bg: rgba(0, 0, 0, 0.7) !default;
+$awn-modal-wrapper-z-index: 99999 !default;
+$awn-modal-bg: #fff !default;
+$awn-modal-min-width: 320px !default;
+$awn-modal-font-size: 14px !default;
+$awn-modal-icon-size: 44px !default;
+$awn-modal-padding: 24px !default;
+$awn-modal-btn-height: 32px !default;
+$awn-modal-btn-color: #fff !default;
+$awn-modal-btn-space: 8px !default;
+
+// Animations
+$awn-modal-show-animation: awn-fade-in;
+$awn-modal-hide-animation: awn-fade-out;
+$awn-modal-animation-timing: ease-out;
+
+$awn-toast-left-show-animation: awn-slide-left;
+$awn-toast-right-show-animation: awn-slide-right;
+$awn-toast-hide-animation: awn-fade-out;
+$awn-toast-animation-timing: linear;
+
+@import '~vue-awesome-notifications/dist/styles/style.scss';
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+
+@import '~material-design-icons-iconfont/dist/material-design-icons.css';
+@import '~vuetify/dist/vuetify.min.css';
+@import '~eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';
+@import '/cleanui/vendors/bootstrap/dist/css/bootstrap.css';
+
+@import '~datatables.net-bs4/css/dataTables.bootstrap4.min.css';
+@import '~datatables.net-autofill-bs4/css/autoFill.bootstrap4.css';
+//@import '~datatables.net-editor-bs4';
+//@import '~datatables.net-buttons-bs4';
+//@import '~datatables.net-colreorder-bs4';
+//@import '~datatables.net-fixedcolumns-bs4';
+//@import '~datatables.net-fixedheader-bs4';
+//@import '~datatables.net-keytable-bs4';
+//@import '~datatables.net-responsive-bs4';
+//@import '~datatables.net-rowgroup-bs4';
+//@import '~datatables.net-rowreorder-bs4';
+//@import '~datatables.net-scroller-bs4';
+//@import '~datatables.net-select-bs4';
+
+@import '/cleanui/vendors/perfect-scrollbar/css/perfect-scrollbar.min.css';
+@import '/cleanui/vendors/ladda/dist/ladda-themeless.min.css';
+@import "/cleanui/vendors/font-linearicons/style.css";
+@import '/cleanui/vendors/font-icomoon/style.css';
+@import "/cleanui/vendors/font-awesome/css/font-awesome.min.css";
+@import "/cleanui/components/core/common/core.cleanui.css";
+@import "/cleanui/components/core/widgets/widgets.cleanui.css";
+@import "/cleanui/components/vendors/common/vendors.cleanui.css";
+@import "/cleanui/components/settings/common/settings.cleanui.css";
+@import "/cleanui/components/settings/themes/themes.cleanui.css";
+@import "/cleanui/components/pages/common/pages.cleanui.css";
+//@import "/cleanui/components/ecommerce/common/ecommerce.cleanui.css";
+//@import "/cleanui/components/apps/common/apps.cleanui.css";
+//@import "/cleanui/components/blog/common/blog.cleanui.css";
+//@import "/cleanui/components/youtube/common/youtube.cleanui.css";
+//@import "/cleanui/components/github/common/github.cleanui.css";
+//@import "/cleanui/components/docs/common/docs.cleanui.css";
+
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+//.cui-initial-loading {
+//  position: fixed;
+//  z-index: 99999;
+//  top: 0;
+//  left: 0;
+//  width: 100%;
+//  height: 100%;
+//  background-position: center center;
+//  background-repeat: no-repeat;
+//  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDFweCIgIGhlaWdodD0iNDFweCIgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIiBjbGFzcz0ibGRzLXJvbGxpbmciPiAgICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiBmaWxsPSJub25lIiBuZy1hdHRyLXN0cm9rZT0ie3tjb25maWcuY29sb3J9fSIgbmctYXR0ci1zdHJva2Utd2lkdGg9Int7Y29uZmlnLndpZHRofX0iIG5nLWF0dHItcj0ie3tjb25maWcucmFkaXVzfX0iIG5nLWF0dHItc3Ryb2tlLWRhc2hhcnJheT0ie3tjb25maWcuZGFzaGFycmF5fX0iIHN0cm9rZT0iIzAxOTBmZSIgc3Ryb2tlLXdpZHRoPSIxMCIgcj0iMzUiIHN0cm9rZS1kYXNoYXJyYXk9IjE2NC45MzM2MTQzMTM0NjQxNSA1Ni45Nzc4NzE0Mzc4MjEzOCIgdHJhbnNmb3JtPSJyb3RhdGUoODQgNTAgNTApIj4gICAgICA8YW5pbWF0ZVRyYW5zZm9ybSBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iIHR5cGU9InJvdGF0ZSIgY2FsY01vZGU9ImxpbmVhciIgdmFsdWVzPSIwIDUwIDUwOzM2MCA1MCA1MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxcyIgYmVnaW49IjBzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSI+PC9hbmltYXRlVHJhbnNmb3JtPiAgICA8L2NpcmNsZT4gIDwvc3ZnPg==);
+//  background-color: #f2f4f8;
+//}
+$orange: #fb434a;
+$blue: #0190fe;
+@import 'custom.scss';

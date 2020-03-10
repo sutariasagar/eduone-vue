@@ -1,0 +1,6 @@
+{
+    "toolbar": [
+        ["Bold", "Italic", "Underline", "Strike","Image"]
+    ],
+    "entities": false
+}

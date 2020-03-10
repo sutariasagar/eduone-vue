@@ -1,0 +1,502 @@
+<template>
+    <div class="cui-layout-header">
+        <div class="cui-topbar">
+            <div class="cui-topbar-left">
+                <div class="cui-topbar-item">
+                    <span class="font-size-18">
+                        <span  v-for="(breadcrumb, idx) in breadcrumbList" :key="idx">
+
+                            <a @click="routeTo(idx)" class="text-muted" v-if="idx+1 < breadcrumbList.length"> {{ breadcrumb.name }}  ·</a>
+
+                            <a @click="routeTo(idx)" v-else><strong > {{ breadcrumb.name }} </strong> </a>
+                            <small class="text-muted" v-if="breadcrumb.extra"> {{ breadcrumb.extra }} </small>
+                        </span>
+                    </span>
+                </div>    
+            </div>
+
+            <!-- right aligned items -->
+            <div class="cui-topbar-right">
+
+                <div class="cui-topbar-item">
+                    <b-dropdown id="ddown-left" class="dropdown cui-topbar-avatar-dropdown">
+                        <template slot="button-content" class="dropdown-toggle" >
+                              <span class="cui-topbar-avatar">
+                                <img v-if="item.profile_image && item.profile_image.id"  :src="'/storage/'+item.profile_image.id+'/'+item.profile_image.file_name"  class="rounded-circle" alt="">
+                                <img v-else  src="/cleanui/components/dummy-assets/common/img/avatars/1.jpg"  class="rounded-circle" alt="">
+                              </span>
+                        </template>
+                        <b-dropdown-item >
+                            <router-link :to="{ name: 'profile' }"><i class="dropdown-icon icmn-user"></i>Profile</router-link>
+                        </b-dropdown-item>
+                        <div class="dropdown-divider"></div>
+                        <b-dropdown-item href="#logout" onclick="$('#logout').submit()"><i class="dropdown-icon icmn-exit"></i>Logout</b-dropdown-item>
+                    </b-dropdown>
+                </div>
+                <!--<div class="cui-topbar-item">-->
+                    <!--<div class="cui-topbar-menu-button cui-menu-right-action-toggle">-->
+                        <!--<i class="fa fa-bars"> </i>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+
+    </div>
+</template>
+<script>
+    import { mapGetters, mapActions } from 'vuex'
+    import Avatar from 'vue-avatar'
+    export default {
+        components: {
+            Avatar
+        },
+        data() {
+            return {
+                breadcrumbList: []
+            }
+        },
+        mounted() {
+            this.updateList()
+        },
+        created() {
+            // Code...
+            //console.log(this.breadcrumbList);
+        },
+        computed: {
+            ...mapGetters('Profile', ['item','loading']),
+        },
+        watch: {
+            '$route' (){
+                this.updateList()
+            }
+        },
+        methods: {
+            updateList() {
+                this.breadcrumbList = this.$route.meta.breadcrumb;
+            },
+            routeTo(pRouteTo) {
+                if(this.breadcrumbList[pRouteTo].link)
+                  this.$router.push(this.breadcrumbList[pRouteTo].link)
+            },
+            routerBack() {
+                this.$router.go(-1)
+            }
+        }
+    }
+</script>
+<style scoped="">
+    /*  STYLES FOR "cui-topbar" MODULE */
+    .cui-topbar {
+        min-height: 64px;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        background: #fff;
+        border-bottom: 1px solid #e4e9f0;
+        color: #74708d;
+        padding: 0 1.53rem;
+    }
+
+    .cui-topbar-avatar {
+        width: 2.69rem;
+        height: 2.69rem;
+        background-color: #eef0f4;
+        border-color: #d2d9e5;
+        display: inline-block;
+        overflow: hidden;
+        -webkit-border-radius: 500px;
+        border-radius: 5px;
+    }
+
+    .cui-topbar-avatar img {
+        width: 100%;
+        height: auto;
+    }
+
+    .cui-topbar-avatar-dropdown {
+        margin-top: 5px;
+    }
+
+    .cui-topbar-avatar-dropdown .dropdown-toggle {
+        padding-right: 1.38rem;
+        display: inline-block;
+    }
+
+    .cui-topbar-avatar-dropdown .dropdown-toggle:after {
+        position: absolute;
+        top: 50%;
+        margin-top: -5px;
+        right: 0rem;
+    }
+
+    .cui-topbar-left {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    .cui-topbar-left .cui-topbar-item {
+        margin-right: 1.53rem;
+    }
+
+    .cui-topbar-left .cui-topbar-item:last-child {
+        margin-right: 0;
+    }
+
+    .cui-topbar-right {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    .cui-topbar-right .cui-topbar-item {
+        margin-left: 1.53rem;
+    }
+    /* For screen resolution of iPhone 5/SE
+    @media only screen and (max-width:320px){
+        .cui-topbar-right .cui-topbar-item{
+            margin-left:16.53rem;
+        }
+    }
+    For screen resolution of iPhone 6/7/8 plus 
+    @media only screen and (max-width:414px){
+        .cui-topbar-right .cui-topbar-item{
+            margin-left:22.53rem;
+        }
+    } */
+
+    .cui-topbar-mini-chart {
+        height: 2.3rem;
+        line-height: 2.3rem;
+        margin-left: 1.53rem;
+    }
+
+    @media (max-width: 1300px) {
+        .cui-topbar-mini-chart {
+            display: none;
+        }
+    }
+
+    .cui-topbar-mini-chart-inner {
+        height: 80%;
+        display: -webkit-inline-box;
+        display: -webkit-inline-flex;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        vertical-align: sub;
+        margin: 0 0.38rem;
+    }
+
+    .cui-topbar-mini-chart-inner i {
+        display: block;
+        float: left;
+        width: 4px;
+        background: #0190fe;
+        margin-right: 1px;
+        -webkit-align-self: flex-end;
+        -ms-flex-item-align: end;
+        align-self: flex-end;
+    }
+
+    .cui-topbar-menu-button {
+        cursor: pointer;
+        height: 2.3rem;
+        padding-top: 0.3rem;
+        color: #d2d9e5;
+        font-size: 1.23rem;
+        -webkit-transition: color 0.2s ease-in-out;
+        -o-transition: color 0.2s ease-in-out;
+        transition: color 0.2s ease-in-out;
+    }
+
+    .cui-topbar-menu-button:hover {
+        color: #b8beca;
+    }
+
+    .cui-topbar-search {
+        position: relative;
+    }
+
+    .cui-topbar-search input {
+        background-color: #eef0f4;
+        border: 1px solid #e4e9f0;
+        padding: 4px 15px 4px 34px;
+        -webkit-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        height: 32px;
+    }
+
+    .cui-topbar-search input:focus, .cui-topbar-search input:hover {
+        border-color: #0190fe;
+    }
+
+    @media screen and (max-width: 991px) {
+        .cui-topbar-search input {
+            width: 30px !important;
+            padding-left: 22px !important;
+        }
+    }
+
+    .cui-topbar-search i {
+        position: absolute;
+        top: 10px;
+        left: 14px;
+        cursor: pointer;
+        color: #d2d9e5;
+    }
+
+    .cui-topbar-search i:hover {
+        color: #615d7c;
+    }
+
+    /*  NOTIFICATION BLOCK (TOP MENU) */
+    .cui-topbar-activity {
+        width: 22.3rem;
+        margin: -0.54rem 0;
+        background: #fff;
+    }
+
+    .cui-topbar-activity-item {
+        border-bottom: 1px solid #e4e9f0;
+        padding: 0.76rem 0;
+        position: relative;
+    }
+
+    .cui-topbar-activity-item:last-child {
+        border-bottom: 0;
+    }
+
+    .cui-topbar-activity-item:hover {
+        background: #eef0f4;
+    }
+
+    .cui-topbar-activity-item:hover .cui-topbar-activity-icon {
+        background: #c0bdd0;
+        color: #fff;
+        border-color: #c0bdd0;
+    }
+
+    .cui-topbar-activity-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        padding-top: 0.92rem;
+        font-size: 1.23rem;
+        width: 3.07rem;
+        text-align: center;
+        color: #d2d9e5;
+        background: #f2f4f8;
+        border-bottom: 1px solid #eef0f4;
+    }
+
+    .cui-topbar-activity-inner {
+        margin-left: 3.84rem;
+        padding-right: 1.15rem;
+    }
+
+    .cui-topbar-activity-inner label {
+        font-size: 0.92rem;
+    }
+
+    .cui-topbar-activity-descr {
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .cui-topbar-activity-title > span {
+        font-size: 1rem;
+        color: #d2d9e5;
+    }
+
+    /*  LIVESEARCH */
+    .cui-topbar-livesearch {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        z-index: 100;
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .cui-topbar-livesearch-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .cui-topbar-livesearch-close {
+        font-size: 0.92rem;
+        color: #acb7bf;
+        position: absolute;
+        top: 2.3rem;
+        right: 2.3rem;
+        cursor: pointer;
+        outline: none !important;
+        z-index: 1;
+        border: none;
+        background-color: transparent;
+        -webkit-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .cui-topbar-livesearch-close:hover {
+        color: #74708d;
+    }
+
+    .cui-topbar-livesearch-wrapper {
+        padding-top: 1.07rem;
+        padding-left: 5rem;
+        padding-right: 1.15rem;
+        line-height: 1.7;
+    }
+
+    @media screen and (max-width: 767px) {
+        .cui-topbar-livesearch-wrapper {
+            padding-left: 4.61rem;
+            padding-right: 2.3rem;
+        }
+    }
+
+    .cui-topbar-livesearch-logo {
+        height: 3.46rem;
+    }
+
+    .cui-topbar-livesearch-logo-container {
+        margin-top: 1.53rem;
+        margin-bottom: 2.3rem;
+    }
+
+    .cui-topbar-livesearch-input {
+        width: 100%;
+        border: none;
+        font-size: 4.92rem;
+        background-color: transparent;
+        font-weight: bold;
+        padding: 0;
+        margin-bottom: 1.53rem;
+    }
+
+    @media screen and (max-width: 767px) {
+        .cui-topbar-livesearch-input {
+            font-size: 3.07rem;
+        }
+    }
+
+    .cui-topbar-livesearch-options {
+        padding: 0;
+        margin: 0;
+        margin-bottom: 2.3rem;
+        list-style: none;
+    }
+
+    .cui-topbar-livesearch-option {
+        display: inline-block;
+        margin-right: 2rem;
+        font-size: 1rem;
+        color: #74708d;
+    }
+
+    .cui-topbar-livesearch-option:last-child {
+        margin-right: 0;
+    }
+
+    .cui-topbar-livesearch-suggestion {
+        margin-bottom: 3.07rem;
+    }
+
+    @media (max-width: 767px) {
+        .cui-topbar-livesearch-suggestion {
+            margin-bottom: 1.15rem;
+        }
+    }
+
+    .cui-topbar-livesearch-results-title {
+        font-weight: 700;
+        margin-bottom: 1.53rem;
+    }
+
+    .cui-topbar-livesearch-result {
+        display: block;
+        margin-left: 5.38rem;
+        padding-top: 0.61rem;
+    }
+
+    .cui-topbar-livesearch-result-thumb {
+        display: block;
+        width: 3.84rem;
+        height: 3.84rem;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        overflow: hidden;
+        background-color: #acb7bf;
+        color: #fff;
+        line-height: 4.15rem;
+        text-align: center;
+        font-size: 1.38rem;
+        font-weight: bold;
+        -webkit-background-size: cover;
+        background-size: cover;
+        float: left;
+    }
+
+    .cui-topbar-livesearch-result-content {
+        margin-bottom: 1.53rem;
+        min-height: 3.84rem;
+    }
+
+    .cui-topbar-livesearch-result-text {
+        font-weight: 300;
+        font-size: 1.53rem;
+        line-height: 1;
+    }
+
+    @media (max-width: 543px) {
+        .cui-topbar-livesearch-result-text {
+            font-size: 1.23rem;
+        }
+    }
+
+    .cui-topbar-livesearch-result-source {
+        color: #c0bdd0;
+    }
+    .font-size-18{
+        color: black;
+    }
+    span a{
+        cursor:pointer;
+
+    }
+    
+</style>
